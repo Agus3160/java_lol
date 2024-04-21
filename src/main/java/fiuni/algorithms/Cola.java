@@ -2,27 +2,27 @@ package fiuni.algorithms;
 
 import java.util.LinkedList;
 import java.util.Queue;
-import fiuni.process_model.Process;
+import fiuni.process_model.BCP;
 
 public class Cola {
-    private Queue<Process> colaProcesos;
+    private Queue<BCP> colaProcesos;
 
     public Cola() {
         this.colaProcesos = new LinkedList<>();
     }
 
-    public void insert(Process elemento) {
+    public void insert(BCP elemento) {
       colaProcesos.add(elemento); // Agregar el elemento al final de la cola
     }
 
-    public Process remove() {
+    public BCP remove() {
         if (isEmpty()) {
             throw new IllegalStateException("La cola está vacía");
         }
         return colaProcesos.poll(); // Eliminar y devolver el primer elemento de la cola
     }
 
-    public Process peekFront() {
+    public BCP peekFront() {
         if (isEmpty()) {
             throw new IllegalStateException("La cola está vacía");
         }
