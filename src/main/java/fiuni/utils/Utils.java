@@ -38,6 +38,37 @@ public class Utils {
     }
    }
 
+   static public boolean reiniciarRafagasEjecutadas(List<BCP> procesos){
+    for(BCP p : procesos){
+        try{
+            p.setRafagasEjecutadas(0);
+        }catch(Exception e){
+            System.out.println(e.getMessage());
+            return false;
+        }
+    }
+    return true;
+   }
+
+//    static public BCP obtenerProcesoMenorRafagaEnInstante(List<BCP> procesos, int instante){
+//         List<BCP> pr = new ArrayList<>();
+//         for(BCP p : procesos){
+//             if(p.getTiempoLlegada() <= instante){
+//                pr.add(p);
+//            }
+//         }
+//         if(pr.size() > 0){
+//             BCP pTemp = pr.get(0);
+//             for(BCP p : pr){
+//                 if(p.getRafaga() < pTemp.getRafaga()){
+//                     pTemp = p;
+//                 }
+//             }
+//             return pTemp;
+//         }
+//         return null;
+//    }
+
    //TODO: Funcion que ordene los procesos por tiempo de llegada
    
 }
