@@ -1,4 +1,4 @@
-package fiuni.process_model;
+package fiuni.model;
 
 public class BCP {
   
@@ -21,6 +21,11 @@ public class BCP {
   //Constructor para procesos que no tengan prioridad
   public BCP(String nombre, int tiempoLlegada, int rafaga) {
     this(nombre, tiempoLlegada, rafaga, 0, 0, 0); 
+  }
+
+  //Constructor para procesos que no tengan prioridad
+  public BCP(String nombre, int tiempoLlegada, int rafaga, int prioridad) {
+    this(nombre, tiempoLlegada, rafaga, prioridad, 0, 0); 
   }
 
   public String getNombre() {

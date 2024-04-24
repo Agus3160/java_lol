@@ -1,7 +1,10 @@
 package fiuni.utils;
 
+import java.util.Comparator;
 import java.util.List;
-import fiuni.process_model.BCP;
+import java.util.Queue;
+
+import fiuni.model.BCP;
 
 public class Utils {
    
@@ -15,7 +18,7 @@ public class Utils {
    }
 
    // Crear matriz para representar el gráfico
-   static public String[][] obtenerTiempoLlegadaTotal(List<BCP> procesos, int tiempoTotal) {
+   static public String[][] dibujarTablaProcesos(List<BCP> procesos, int tiempoTotal) {
     String[][] grafico = new String[procesos.size()][tiempoTotal];
     for (String[] row : grafico) {
         for (int i = 0; i < row.length; i++) {
@@ -38,6 +41,16 @@ public class Utils {
     }
    }
 
+   //Calcular promedios
+   static public void calcularPromedios(int tiempoEsperaTotal, int tiempoRespuestaTotal, int procesosCant){
+        // Calcular promedios
+        double promedioEspera = (double) tiempoEsperaTotal / procesosCant;
+        double promedioRespuesta = (double) tiempoRespuestaTotal / procesosCant;
+
+        System.out.printf("\nTiempo promedio de espera: %.2f \n", promedioEspera);
+        System.out.printf("Tiempo promedio de respuesta: %.2f \n", promedioRespuesta);
+   }
+
    static public boolean reiniciarRafagasEjecutadas(List<BCP> procesos){
     for(BCP p : procesos){
         try{
@@ -50,25 +63,33 @@ public class Utils {
     return true;
    }
 
-//    static public BCP obtenerProcesoMenorRafagaEnInstante(List<BCP> procesos, int instante){
-//         List<BCP> pr = new ArrayList<>();
-//         for(BCP p : procesos){
-//             if(p.getTiempoLlegada() <= instante){
-//                pr.add(p);
-//            }
-//         }
-//         if(pr.size() > 0){
-//             BCP pTemp = pr.get(0);
-//             for(BCP p : pr){
-//                 if(p.getRafaga() < pTemp.getRafaga()){
-//                     pTemp = p;
-//                 }
-//             }
-//             return pTemp;
-//         }
-//         return null;
-//    }
-
-   //TODO: Funcion que ordene los procesos por tiempo de llegada
    
+   /**
+    * Ordena la lista de procesos por tiempo de llegada
+    */
+   private static class BCPComparatorTiempoLlegada implements Comparator<BCP> {
+        @Override
+        public int compare(BCP p1, BCP p2) {
+        // Compare based on arrival time
+        return p1.getTiempoLlegada() - p2.getTiempoLlegada();
+        }
+    }
+
+    /**
+     * Ordena la lista de procesos por tiempo de llegada
+     * @param procesos La lista de procesos que seran procesados
+     * @return La lista de procesos ordenada por tiempo de llegada
+     */
+   static public List<BCP> ordenarPorLlegada(List<BCP> procesos){
+       procesos.sort(new BCPComparatorTiempoLlegada());
+       return procesos;
+   }
+
+   static public boolean mandarPrimerProcesoAlFondo(Queue<BCP> procesos){
+        BCP primerProceso = procesos.poll();
+        return procesos.add(primerProceso);
+   }
+   
+
+       
 }

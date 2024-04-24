@@ -1,8 +1,8 @@
 package fiuni.algorithms;
 
-import fiuni.process_model.BCP;
 import java.util.List;
 
+import fiuni.model.BCP;
 import fiuni.utils.Utils;
 
 // Clase para implementar el algoritmo FCFS
@@ -10,11 +10,11 @@ public class FCFS {
     public static void ejecutar(List<BCP> procesos) {
         
         int tiempoActual = 0;
-        int tiempoEsperaTotal = 0;
-        int tiempoRespuestaTotal = 0;
+        int totalTiempoEspera = 0;
+        int totalTiempoRespuesta = 0;
 
         int tiempoTotal = Utils.obtenerTiempoTotal(procesos);
-        String grafico[][] = Utils.obtenerTiempoLlegadaTotal(procesos, tiempoTotal);
+        String grafico[][] = Utils.dibujarTablaProcesos(procesos, tiempoTotal);
 
         while(tiempoActual < tiempoTotal) {
 
@@ -28,10 +28,10 @@ public class FCFS {
                 
                 //Obtener tiempo de respuesta
                 tiempoPrimeraEjecucion = tiempoActual;
-                tiempoEsperaTotal += tiempoPrimeraEjecucion - pTemp.getTiempoLlegada();
+                totalTiempoEspera += tiempoPrimeraEjecucion - pTemp.getTiempoLlegada();
                 
                 //Obtener el tiempo de respuesta que seria cuando el proceso se ejecutara por primera vez
-                tiempoRespuestaTotal += tiempoPrimeraEjecucion - pTemp.getTiempoLlegada() + 1;
+                totalTiempoRespuesta += tiempoPrimeraEjecucion - pTemp.getTiempoLlegada() + 1;
                 
                 //Dibujamos en la matriz los nodos de tiempo que el proceso en cuestion esta de espera
                 for(int k = pTemp.getTiempoLlegada(); k < tiempoActual; k++){
@@ -52,10 +52,7 @@ public class FCFS {
         Utils.mostrarGrafico(grafico, procesos);
 
         // Calcular promedios
-        double promedioEspera = (double) tiempoEsperaTotal / procesos.size();
-        double promedioRespuesta = (double) tiempoRespuestaTotal / procesos.size();
+        Utils.calcularPromedios(totalTiempoEspera, totalTiempoRespuesta, procesos.size());
 
-        System.out.println("\nTiempo promedio de espera: " + promedioEspera);
-        System.out.println("Tiempo promedio de respuesta: " + promedioRespuesta);
     }
 }

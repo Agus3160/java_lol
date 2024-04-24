@@ -2,13 +2,13 @@ package fiuni.algorithms;
 
 import java.util.List;
 
-import fiuni.process_model.BCP;
+import fiuni.model.BCP;
 import fiuni.utils.Utils;
 
 /**
  * SFJDesalojo
  */
-public class SFJDesalojo {
+public class SJFDesalojo {
 
   public static void ejecutar(List<BCP> procesos) {
 
@@ -17,7 +17,7 @@ public class SFJDesalojo {
     int totalTiempoRespuesta = 0;
 
     int tiempoTotal = Utils.obtenerTiempoTotal(procesos);
-    String grafico[][] = Utils.obtenerTiempoLlegadaTotal(procesos, tiempoTotal);
+    String grafico[][] = Utils.dibujarTablaProcesos(procesos, tiempoTotal);
 
     while (tiempoActual < tiempoTotal) {
       BCP currentBcp = null;
@@ -55,11 +55,8 @@ public class SFJDesalojo {
     Utils.mostrarGrafico(grafico, procesos);
 
     // Calcular promedios
-    double promedioEspera = (double) totalTiempoEspera / procesos.size();
-    double promedioRespuesta = (double) totalTiempoRespuesta / procesos.size();
+    Utils.calcularPromedios(totalTiempoEspera, totalTiempoRespuesta, procesos.size());
 
-    System.out.println("\nTiempo promedio de espera: " + promedioEspera);
-    System.out.println("Tiempo promedio de respuesta: " + promedioRespuesta);
   }
 
 }

@@ -2,7 +2,8 @@ package fiuni.algorithms;
 
 import java.util.LinkedList;
 import java.util.Queue;
-import fiuni.process_model.BCP;
+
+import fiuni.model.BCP;
 
 public class Cola {
     private Queue<BCP> colaProcesos;

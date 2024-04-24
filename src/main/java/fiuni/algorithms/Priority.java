@@ -6,8 +6,7 @@ import java.util.List;
 import fiuni.model.BCP;
 import fiuni.utils.Utils;
 
-public class SJF {
-
+public class Priority {
   public static void ejecutar(List<BCP> procesos) {
 
     int tiempoActual = 0;
@@ -33,7 +32,7 @@ public class SJF {
 
       if(procesoEjecutar == null){
         for (BCP proceso : pendientes.keySet()) {
-          if (proceso.getTiempoLlegada() <= tiempoActual && (procesoEjecutar == null || proceso.getRafaga() < procesoEjecutar.getRafaga())) {
+          if (proceso.getTiempoLlegada() <= tiempoActual && (procesoEjecutar == null || proceso.getPrioridad() < procesoEjecutar.getPrioridad())) {
             procesoEjecutar = proceso;
           }
         }
@@ -67,6 +66,5 @@ public class SJF {
 
     // Calcular promedios
     Utils.calcularPromedios(totalTiempoEspera, totalTiempoRespuesta, procesos.size());
-
   }
 }
