@@ -45,7 +45,7 @@
             for(BCP process : pendientes.keySet()){
               if(process == procesoEjecutar){
                 grafico[pendientes.get(process)][i] = " 1 ";
-              }else if(process.getTiempoLlegada() <= tiempoActual && process.getRafaga() != process.getRafagasEjecutadas()){
+              }else if(process.getTiempoLlegada() <= i && process.getRafaga() > process.getRafagasEjecutadas()){
                 grafico[pendientes.get(process)][i] = " W ";
               }else{
                 grafico[pendientes.get(process)][i] = " 0 ";
