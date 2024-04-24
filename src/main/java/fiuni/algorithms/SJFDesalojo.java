@@ -35,7 +35,7 @@ public class SJFDesalojo {
        
         }
 
-        grafico[j][tiempoActual] = (0 == pTemp.getRafagasEjecutadas() && pTemp.getTiempoLlegada() <= tiempoActual) ? " W " : " 0 ";
+        grafico[j][tiempoActual] = (pTemp.getRafagasEjecutadas() < pTemp.getRafaga() && pTemp.getTiempoLlegada() <= tiempoActual) ? " W " : " 0 ";
       
       }
 

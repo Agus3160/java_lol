@@ -90,6 +90,23 @@ public class Utils {
         return procesos.add(primerProceso);
    }
    
+   static public BCP calcularHRRN(List<BCP> procesos, int tiempoActual) {
+    double bestHrrn = Double.MIN_VALUE;
+    BCP processToReturn = null;
 
+    for (BCP proceso : procesos) {
+        if (proceso.getTiempoLlegada() <= tiempoActual && proceso.getRafaga() != proceso.getRafagasEjecutadas()) {
+            int tiempoEspera = tiempoActual - proceso.getTiempoLlegada();
+            double hrrn = (double) (proceso.getRafaga() + tiempoEspera) / proceso.getRafaga();
+            if (hrrn > bestHrrn) {
+                // System.out.println("El Proceso con mejor HRRN es: " + hrrn);
+                bestHrrn = hrrn;
+                processToReturn = proceso;
+            }
+        }
+    }
+
+    return processToReturn;
+}
        
 }

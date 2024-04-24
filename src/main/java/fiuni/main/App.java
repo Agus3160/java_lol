@@ -6,6 +6,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import fiuni.algorithms.FCFS;
+import fiuni.algorithms.HRRN;
 import fiuni.algorithms.Priority;
 import fiuni.algorithms.RR;
 import fiuni.algorithms.SJF;
@@ -17,13 +18,13 @@ public class App {
         // Crear una lista de procesos de ejemplo (puedes leerlos desde un archivo CSV
         // en su lugar)
         List<BCP> procesos = new ArrayList<>();
-        procesos.add(new BCP("P1", 0, 3));
-        procesos.add(new BCP("P2", 1, 4));
-        procesos.add(new BCP("P3", 2,5));
-        procesos.add(new BCP("P4", 3,2));
-        procesos.add(new BCP("P5", 4,6));
-        procesos.add(new BCP("P6", 4,3));
-        procesos.add(new BCP("P7", 4, 3));
+        procesos.add(new BCP("P1", 0, 4));
+        procesos.add(new BCP("P2", 1, 6));
+        procesos.add(new BCP("P3", 1,2));
+        procesos.add(new BCP("P4", 2,8));
+        procesos.add(new BCP("P5", 3,6));
+        procesos.add(new BCP("P6", 3,3));
+        procesos.add(new BCP("P7", 1, 5));
 
 
         //Crear una lista de procesos con prioridad
@@ -58,6 +59,12 @@ public class App {
 
         // Ejecutar el algoritmo RR
         RR.ejecutar(procesos, 4);
+
+        // Reiniciar las rafagas de ejecución
+        Utils.reiniciarRafagasEjecutadas(procesos);
+
+        // Ejecutar el algoritmo HRRN
+        HRRN.ejecutar(procesos);
         
     }
 }
